@@ -1,0 +1,7 @@
+<launch>
+
+    <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
+    <node pkg="server_client" name="speed_client" type="PythonClient.py" />
+    <node pkg="platooning_package" name="main_distance_controller" type="main_distance_controller" output="screen" />
+
+</launch>
