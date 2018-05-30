@@ -1,5 +1,6 @@
 <launch>
 
     <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
+    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch"/>
     <node pkg="server_client" name="speed_server" type="PythonServer.py" />
 </launch>
