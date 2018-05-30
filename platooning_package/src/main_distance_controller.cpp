@@ -33,11 +33,6 @@ float velocity;
 float angle;
 float lidar_radius = 0.032;
 float theta_ref = 0;
-int lengths = 0;
-float recorded_distances [150];
-float recorded_angles [150];
-float recorded_velocity [150];
-float recorded_angular [150];
 
 // enable time difference measurements
 clock_t t;
@@ -104,29 +99,6 @@ void lidarCallback(const sensor_msgs::LaserScan& msg)
 	//store distance and relative angle to make it available for the main function
 	distance = lowest_value + lidar_radius;
 	angle = degrees2radians(lowest_value_angle);
-	
-	if (lengths <= 149)
-	{
-		recorded_distances[lengths] = distance;
-		recorded_angles[lengths] = angle;
-		recorded_velocity[lengths] = velocity;
-		recorded_angular[lengths] = angle * k_theta;
-	}
-
-	if (lengths == 149)
-	{
-		std::ofstream df;
-		df.open("FullSystemTestEmergency.csv");
-		for (int i = 0; i < 200; i++)
-		{
-			df << recorded_distances[i] << "," << recorded_angles[i] << "," << recorded_velocity[i] << "," << recorded_angular[i] << std::endl;
-		}
-		df.close();
-		ROS_INFO_STREAM("HERE?");
-	}
-
-	lengths ++;
-
 }
 
 // Receive lead car velocity
